@@ -1,4 +1,4 @@
-#ifndef PESSOA_HPP
+#ifndef RETANGULO_HPP
 #define RETANGULO_HPP
 
 #include <cstdint>
