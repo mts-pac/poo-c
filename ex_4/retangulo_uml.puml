@@ -1,0 +1,17 @@
+@startuml Retangulo
+class Retangulo {
+ - base: unsigned int
+ - altura: unsigned int
+ + Retangulo(base: unsigned int = 30, altura: unsigned int = 20)
+
+ + getArea(): unsigned long long
+ + getPerimetro(): unsigned long long
+ + getDiagonal(): double
+
+ + getBase(): unsigned int
+ + setBase(base: unsigned int): void
+
+ + getAltura():  unsigned int
+ + setAltura(altura: unsigned int): void
+}
+@enduml
