@@ -1,15 +1,16 @@
-#ifndef DISCIPLINA_H
-#define DISCIPLINA_H
+#ifndef DISCIPLINA_HPP
+#define DISCIPLINA_HPP
 
 #include <string>
 
+#include "Curso.hpp"
 #include "Pessoa.hpp"
 
 class Disciplina {
  public:
-  Disciplina();
+  Disciplina(Curso& curso);
 
-  Disciplina(std::string nome);
+  Disciplina(Curso& curso, std::string nome);
 
   std::string getNome();
 
@@ -27,9 +28,11 @@ class Disciplina {
 
   Pessoa** getVetorAlunos();
 
+  Curso& getCurso();
+
   bool adicionarAluno(Pessoa* aluno);
 
-  void imprimirDados(std::string& cabecalho, unsigned int chTotalCurso);
+  void imprimirDados(std::string& cabecalho);
 
  private:
   std::string nome;
@@ -37,5 +40,6 @@ class Disciplina {
   Pessoa* professor;
   Pessoa* alunos[50];
   uint8_t qtdAlunos = 0;
+  Curso& curso;
 };
 #endif

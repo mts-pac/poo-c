@@ -5,7 +5,8 @@ Pessoa::Pessoa() : nome("Matheus") {
   this->setCpf(9296801974);
 };
 
-Pessoa::Pessoa(std::string nome, uint64_t cpf, unsigned short int idade) : nome(nome) {
+Pessoa::Pessoa(std::string nome, uint64_t cpf, unsigned short int idade)
+    : nome(nome) {
   this->setCpf(cpf);
   this->setIdade(idade);
 };

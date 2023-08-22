@@ -1,10 +1,10 @@
-flags=-Wall #-Wshadow
+flags=-Wall
 program=main
 
 all: $(program)
 
-$(program): main.o Pessoa.o Disciplina.o
-	g++ -o $(program) main.o Pessoa.o Disciplina.o $(flags)
+$(program): main.o Pessoa.o Disciplina.o Curso.o
+	g++ -o $(program) main.o Pessoa.o Disciplina.o Curso.o $(flags)
 
 main.o: main.cpp
 	g++ -c main.cpp $(flags)
@@ -14,6 +14,9 @@ Pessoa.o: Pessoa.hpp Pessoa.cpp
 
 Disciplina.o: Disciplina.hpp Disciplina.cpp
 	g++ -c Disciplina.cpp $(flags)
+
+Curso.o:  Curso.hpp Curso.cpp
+	g++ -c Curso.cpp $(flags)
 
 clean:
 	rm -f *.o *.gch

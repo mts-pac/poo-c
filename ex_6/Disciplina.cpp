@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-Disciplina::Disciplina() : professor(nullptr) {}
+Disciplina::Disciplina(Curso& curso) : professor(nullptr), curso(curso) {}
 
-Disciplina::Disciplina(std::string nome) : nome{nome}, professor(nullptr) {}
+Disciplina::Disciplina(Curso& curso, std::string nome)
+    : nome{nome}, professor(nullptr), curso(curso) {}
 
 std::string Disciplina::getNome() { return this->nome; }
 
@@ -35,13 +36,15 @@ bool Disciplina::adicionarAluno(Pessoa* aluno) {
 
 Pessoa** Disciplina::getVetorAlunos() { return this->alunos; }
 
+Curso& Disciplina::getCurso() { return this->curso; }
+
 unsigned short int Disciplina::getQtdAlunos() { return this->qtdAlunos; }
 
-void Disciplina::imprimirDados(std::string& cabecalho,
-                               unsigned int chTotalCurso) {
-  double pctCurso = (double)this->cargaHoraria / chTotalCurso;
+void Disciplina::imprimirDados(std::string& cabecalho) {
+  double pctCurso = (double)this->cargaHoraria / this->curso.getChMinima();
   pctCurso = pctCurso * 100;
   std::cout << cabecalho << '\n';
+  std::cout << "Curso: " << this->curso.getNome() << '\n';
   std::cout << "Disciplina: " << this->nome << '\n';
   std::cout << "Carga: " << cargaHoraria << '\n';
   std::cout << "Porcentagem do curso: " << pctCurso << "%\n";
