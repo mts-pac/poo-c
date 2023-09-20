@@ -1,0 +1,96 @@
+@startuml "Diagrama de Classes"
+class Console {
+ + {static} imprimirDadosDisciplina(disciplina: Disciplina): void
+}
+
+class ConteudoMinistrado {
+ + ConteudoMinistrado(descricao: std::string, cargaHorariaConteudo: unsigned short)
+ + getDescricao(): std::string
+ + getCargaHorariaConteudo(): unsigned short
+ + getId(): unsigned int
+ - {static} proxId: unsigned int
+ - descricao: std::string
+ - cargaHorariaConteudo: unsigned short
+ - id: unsigned int
+}
+
+class Curso {
+ + Curso();
+ + Curso(nome: std::string, chMinima: unsigned short int, anoCriacao: unsigned short int);
+ + getNome(): std::string
+ + setNome(nome: std::string): void
+ + getChMinima(): unsigned short int
+ + setChMinima(chMinima: unsigned short int): void
+ + getAnoCriacao(): unsigned short int
+ + setAnoCriacao(chMinima: unsigned short int): void
+ - nome: std::string
+ - chMinima: uint16_t
+ - anoCriacao: uint16_t
+}
+
+class Disciplina {
+ + Disciplina(curso: Curso)
+ + Disciplina(curso: Curso, nome: std::string)
+ + Disciplina(nome: std::string, curso: Curso, sala: SalaAula)
+ + getNome(): std::string
+ + setNome(nome: std::string): void
+ + getCargaHoraria(): unsigned short int;
+ + setCargaHoraria(cargaHoraria: unsigned short int): void
+ + getProfessor(): Pessoa
+ + setProfessor(prof: Pessoa*): void
+ + getAlunos(): std::list<Pessoa*>
+ + getCurso(): Curso
+ + adicionarAluno(aluno: Pessoa*): bool
+ + removerAluno(it: std::list<Pessoa*>::iterator): std::list<Pessoa*>::iterator
+ + removerAluno(aluno: Pessoa*): bool
+ + removerAluno(cpf: uint64_t): bool
+ + void setSalaAula(sala: SalaAula*)
+ + getSalaAula(): SalaAula*
+ + adicionarConteudoMinistrado(conteudo: std::string, cargaHorariaConteudo: unsigned short): void
+ + removerConteudoMinistrado(id: unsigned long): void
+ + imprimirConteudosMinistrados(): void
+ + getConteudos(): std::list<ConteudoMinistrado*>&
+ + limparConteudos(): void
+ - nome: std::string
+ - cargaHoraria: uint16_t
+ - alunos: std::list<Pessoa*>
+ - curso: Curso&
+ - sala: SalaAula*
+ - professor: Pessoa*
+ - conteudos: std::list<ConteudoMinistrado*>
+}
+
+
+class Pessoa {
+ + Pessoa()
+ + Pessoa(nome: std::string, cpf: uint64_t,  idade: unsigned short int)
+ + getNome(): std::string
+ + setNome(std::string nome): void
+ + getIdade(): unsigned short int
+ + setIdade(idade: unsigned short int): void
+ + getCpf(): uint64_t
+ + setCpf(cpf: uint64_t): void
+ - validarCPF(uint64_t cpf): bool
+ - nome: std::string
+ - idade: uint8_t
+ - cpf: uint64_t
+}
+
+class SalaAula {
+ + SalaAula(nome: std::string, capacidade: unsigned int)
+ + getNome(): std::string
+ + setNome(nome: std::string): void
+ + getCapacidade(): unsigned int
+ + setCapcidade(capacidade: unsigned int): void 
+ + getDisciplinas(): std::list<Disciplina*>&
+ - nome: std::string
+ - capacidade: unsigned int
+ - disciplinasMinistradas: std::list<Disciplina*>
+}
+
+Console ..> Disciplina : <<dependency>>
+Disciplina "1..1 " --> "0..*" Curso
+Disciplina "0..*" -- "0..*" Pessoa
+Disciplina "0..*" *-- "1..1" ConteudoMinistrado
+Disciplina "0..1" -- "0..*" SalaAula
+@enduml
